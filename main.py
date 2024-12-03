@@ -1,21 +1,24 @@
-from flask import Flask
+from flask import Flask, render_template
 
-app_Daniel = Flask (__name__)
+app_Daniel = Flask(__name__ , template_folder='template')
+
+@app_Daniel.route("/index")
+def indice():
+    return render_template ("index.html")
+
+@app_Daniel.route("/")
+def homepage():
+    return render_template ("homepage.html")
+
+@app_Daniel.route("/contato")
+def contato():
+    return render_template("contato.html")
+
+@app_Daniel.route("/usuario")
+def dados_usuario():
+    nome_usuario="Daniel"
+    return render_template("usuario.html", nome = nome_usuario )
 
 
-@app_Daniel.route('/')
-@app_Daniel.route('/rota1')
-def rota1():
-    return 'Olá, turma!'
-
-@app_Daniel.route('/rota2')
-def rota2():
-    resposta = "<H3> Essa é outra página da rota 2 <H3>"
-    return resposta
-
-def saudacoes (nome):
-    return f'Olá, {nome}'
-
-if __name__ == "__main__" :
-    app_Daniel.run()
-
+if __name__ == "__main__":
+    app_Daniel.run(port = 8000)
